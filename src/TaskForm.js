@@ -1,11 +1,11 @@
 import { useState } from "react"
 
 export default function TaskForm({onAdd}){
-    let [taskName,setTaskName] = useState('');
+ const [taskName,setTaskName] = useState('');
     function handleSubmit(ev){
         ev.preventDefault();
         onAdd(taskName);
-        setTaskName=('');
+        setTaskName('');
 
     }
     return (
