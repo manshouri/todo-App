@@ -21,12 +21,51 @@ function App() {
       return [...prev, {name:name,done:false}];
     });
   }
+  function removeTask(indexToRemove){
+setTasks(prev => {
+return prev.filter((taskObject,index) => index !== indexToRemove);
+})
+  }
+  function renameTask(index,newName){
+    setTasks(prev => {
+      // return [...prev];
+      const newTasks =[...prev];
+      newTasks[index].name = newName;
+      return newTasks; 
+    })
+
+  }
+  function updateTaskDone(taskIndex, newDone){
+setTasks(prev =>{
+ const newTasks =[...prev];
+ newTasks[taskIndex].done  = newDone;
+ return newTasks;
+});
+  }
+  const numberComplete = tasks.filter(t => t.done).length;
+  const numberTotal = tasks.length;
+  
+  function getMessage(){
+   const percentage =numberComplete/numberTotal *100;
+   if(percentage===0){
+return 'DO atlest one Task, dont be lazy';
+   }
+   if(percentage===100){
+    return 'Well done, Nice job today';
+   }
+  }
+ 
   return (
     <main>
-     <h1> MASEMBE TODO LIST</h1>
+     <h1> MY TODO LIST</h1>
+     <h1>{numberComplete}/{numberTotal} Complete</h1>
+     <h2>{getMessage()}</h2>
     <TaskForm onAdd={addTask}/>
-    {tasks.map(task =>(
-      <Task {...task}/>
+    {tasks.map((task,index) =>(
+      <Task {...task} 
+      onRename={newName =>renameTask(index,newName)}
+      onTrash={()=> removeTask(index)}
+      onToggle={done => updateTaskDone(index, done)}/>
     ))}
    
    
