@@ -48,7 +48,7 @@ setTasks(prev =>{
   function getMessage(){
    const percentage =numberComplete/numberTotal *100;
    if(percentage===0){
-return 'DO atlest one Task, dont be lazy';
+return 'DO atlest one Task, dont be lazy Man';
    }
    if(percentage===100){
     return 'Well done, Nice job today';
